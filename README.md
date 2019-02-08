@@ -10,6 +10,6 @@ Objective
 
 Progress tracking
 -----------------
-Here I'll log the hours spent on writing code, learning html5 canvas, learning javascript on the frontend and revisiting javascript language concepts as needed. The first log entry accounts for an estimate of the time spent before creating this repository.
+Here I'll log time spent on writing code, learning html5 canvas, learning javascript on the frontend and revisiting javascript language concepts as needed. The first log entry accounts for an estimate of the time spent before creating this repository. Time is measured in minutes.
 
-- 2:00 - code before this repository
+- 120 - code before this repository

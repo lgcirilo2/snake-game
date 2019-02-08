@@ -5,8 +5,6 @@ const snakeCanvas = document.getElementById('snake');
 // keypress event is not fired for all keys (e.g. alt, ctrl, shift, esc, arrow keys) 
 document.addEventListener('keydown', (value) => console.log(value));
 
-// ctx is abbreviation for context
-// let ctx = snakeCanvas.getContext('2d');
 const ctx = snakeCanvas.getContext('2d');
 ctx.fillStyle = 'black';
 ctx.rect(10, 15, 200, 200);

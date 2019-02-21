@@ -15,3 +15,5 @@ Here I'll log time spent on writing code, learning html5 canvas, learning javasc
 - 120 - code before this repository
 - 30  - learned how to create a green square and how to move it
 - 15  - made square move on canvas when arrow key is pressed
+- 158 - collision detection and virtual frame implemented. Jasmine tests for both features also implemented.
+- 20  - created array of squares representing the snake. Jamine test also implemented.

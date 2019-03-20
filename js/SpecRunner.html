@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>Jasmine Spec Runner v3.3.0</title>
@@ -11,16 +11,20 @@
   <script src="lib/jasmine-3.3.0/jasmine-html.js"></script>
   <script src="lib/jasmine-3.3.0/boot.js"></script>
 
-  <!-- include source files here... -->
-  <script src="src/snakeGame.js"></script>
-  <!-- <script src="src/parseChar.js"></script> -->
-
-  <!-- include spec files here... -->
-  <script src="spec/snakeGameSpec.js"></script>
-  <!-- <script src="spec/parseCharSpec.js"></script> -->
+  
 
 </head>
 
 <body>
+    <!-- creates canvas to get rid of error shown in test results page -->
+    <canvas id="snake" width="800" height="600" hidden></canvas>
 </body>
+
+<!-- include source files here... -->
+<script src="src/snakeGame.js"></script>
+<!-- <script src="src/parseChar.js"></script> -->
+
+<!-- include spec files here... -->
+<script src="spec/snakeGameSpec.js"></script>
+<!-- <script src="spec/parseCharSpec.js"></script> -->
 </html>

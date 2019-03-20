@@ -1,4 +1,4 @@
-xdescribe("Collision detection", function() {
+describe("Collision detection", function() {
     it("should return true if points collide", function() {
         expect(detectCollision(0, 0, 0, 0)).toEqual(true);
         expect(detectCollision(100, 100, 100, 100)).toEqual(true);
@@ -9,7 +9,7 @@ xdescribe("Collision detection", function() {
     });
 });
 
-xdescribe("virtual frame", function() {
+describe("virtual frame", function() {
     it("should be an array", function() {
         expect(createVirtualFrame(2, 2)).toEqual(jasmine.any(Array));
     });
@@ -26,7 +26,7 @@ xdescribe("virtual frame", function() {
     });
 });
 
-xdescribe("checks if there will be a collision", function() {
+describe("checks if there will be a collision", function() {
     it("should return a boolean value", function () {
         expect(willItCollide([1,2], [[0,0], [0,1]])).toEqual(jasmine.any(Boolean));
     });
@@ -40,9 +40,15 @@ xdescribe("checks if there will be a collision", function() {
     });
 });
 
-xdescribe("Snake Creation", function() {
+describe("Snake", function() {
+    let snake;
+
+    beforeAll(function() {
+        snake = createSnake(0, 0); 
+    });
+
     it("should be an array", function() {
-        expect(createSnake(0, 0)).toEqual(jasmine.any(Array));
+        expect(snake).toEqual(jasmine.any(Array));
     });
 
     it("should be an array of arrays", function() {
@@ -54,35 +60,100 @@ xdescribe("Snake Creation", function() {
         expect(createSnake(0, 0)[0]).toEqual([0, 0]);
         expect(createSnake(1, 1)[0]).toEqual([1, 1]);
     });
+
+    it("should grow by one block at a time", () => {
+        let snake = createSnake(100,100);
+        snake = growSnake(snake, [110,100]);
+        expect(snake).toEqual([[110,100], [100,100]]);
+
+        snake = growSnake(snake, [120, 100]);
+        expect(snake).toEqual([[120, 100], [110,100], [100,100]]);
+
+    });
+});
+
+describe("snake movement", () => {
+    let snk;
+    let vect;
+
+    beforeEach(function() {
+        snk = [[120, 100], [110,100], [100,100]];
+        vect = [];
+    });
+
+
+    it("should be able to move", () => {
+        vect = [10, 0];
+        expect(typeof move === 'function').toBe(true);
+    });
+
+    it("should return an array", () => {
+        vect = [10,0];
+        expect(move(snk, vect)).toEqual(jasmine.any(Array));
+    });
+
+    it("should be able to move to the right", () => {
+        vect = [10,0];
+        expect(move(snk, vect)).toEqual([[130, 100], [120,100], [110,100]]);
+    });
+
+    it("should be able to move to the left", () => {
+        snk = [ [120,100], [120,90], [120, 80] ];
+        vect = [-10,0];
+        expect(move(snk, vect)).toEqual([[110, 100], [120,100], [120, 90]]);
+    });
 });
 
 describe("vector", function() {
-    let v;
+    let vect;
 
     beforeEach(function() {
-        v = initializeDirectionVector();
+        vect = initializeDirectionVector();
     });
 
     it("should be a two element array", function() {
-        expect(v.length).toEqual(2);
+        expect(vect.length).toEqual(2);
     });
 
     it("should have two numbers as its elements", function() {
-        expect(v).toEqual([jasmine.any(Number), jasmine.any(Number)]);
+        expect(vect).toEqual([jasmine.any(Number), jasmine.any(Number)]);
     });
 
-    it("should change only one axis value at a time", function() {
-
+    it("should be initialized with [0,0]", () => {
+        expect(vect).toEqual([0,0]);
     });
 
-    it("should have one of its axis equalto zero", function() {
-
+    it("should never have one of its values different from 10 or -10 or 0", function() {
+        expect(updateVector([0, 0], 37)).toEqual([-10, 0]);
+        expect(updateVector([0, 0], 38)).toEqual([0, -10]);
+        expect(updateVector([0, 0], 39)).toEqual([10, 0]);
+        expect(updateVector([0, 0], 40)).toEqual([0, 10]);
     });
 
-    it("should not change to the opposite direction", function() {
-
+    it("should not update to same direction", () => {
+        expect(updateVector([10, 0], 39)).toEqual([10, 0]);
+        expect(updateVector([-10, 0], 37)).toEqual([-10, 0]);
+        expect(updateVector([0, 10], 38)).toEqual([0, 10]);
+        expect(updateVector([0, -10], 40)).toEqual([0, -10]);
     });
 
+    it("should not update to opposite direction", function() {
+        expect(updateVector([10, 0], 37)).toEqual([10, 0]);
+        expect(updateVector([-10, 0], 39)).toEqual([-10, 0]);
+        expect(updateVector([0, 10], 40)).toEqual([0, 10]);
+        expect(updateVector([0, -10], 38)).toEqual([0, -10]);
+    });
+
+    it("should set an axis to zero if direction changes to the other axis", () => {
+        expect(updateVector([10, 0], 38)).toEqual([0, -10]);
+        expect(updateVector([10, 0], 40)).toEqual([0, 10]);
+        expect(updateVector([-10, 0], 38)).toEqual([0, -10]);
+        expect(updateVector([-10, 0], 40)).toEqual([0, 10]);
+        expect(updateVector([0, 10], 37)).toEqual([-10, 0]);
+        expect(updateVector([0, 10], 39)).toEqual([10, 0]);
+        expect(updateVector([0, -10], 37)).toEqual([-10, 0]);
+        expect(updateVector([0, -10], 39)).toEqual([10, 0]);
+    });
 });
 
 

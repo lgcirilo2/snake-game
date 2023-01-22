@@ -1,11 +1,11 @@
 /** Canvas testing sandbox */
 
-// const snakeCanvas = document.getElementById('snake');
+const snakeCanvas = document.getElementById('snake');
 const squareSide = 10;
-// let squarePosition = [0, 0];
+let squarePosition = [0, 0];
 let snake = createSnake(100, 100);
-// const ctx = snakeCanvas.getContext('2d');
-// const vf = createVirtualFrame(snakeCanvas.width, snakeCanvas.height, squareSide);
+const ctx = snakeCanvas.getContext('2d');
+const vf = createVirtualFrame(snakeCanvas.width, snakeCanvas.height, squareSide);
 
 
 
@@ -16,19 +16,19 @@ document.addEventListener('keydown', (value) => updateVector(currentVector, valu
 
 
 // color canvas background
-// ctx.fillStyle = 'black';
-// ctx.rect(0, 0, snakeCanvas.width, snakeCanvas.height);
-// ctx.fill();
+ctx.fillStyle = 'green';
+ctx.rect(0, 0, snakeCanvas.width, snakeCanvas.height);
+ctx.fill();
 
 // draw a green square at the top left hand corner of the canvas
-// ctx.closePath();
-// ctx.beginPath();
-// ctx.rect(squarePosition[0], squarePosition[1], squareSide, squareSide);
-// ctx.fillStyle = 'green';
-// ctx.fill();
+ctx.closePath();
+ctx.beginPath();
+ctx.rect(squarePosition[0], squarePosition[1], squareSide, squareSide);
+ctx.fillStyle = 'white';
+ctx.fill();
 
 function eraseCanvas () {
-    ctx.fillStyle = 'black';
+    ctx.fillStyle = 'green';
     ctx.rect(0, 0, snakeCanvas.width, snakeCanvas.height);
     ctx.fill();
     ctx.closePath();
@@ -60,55 +60,55 @@ function willItCollide(point, pointArray) {
     return false;
 }
 
-// function move(direction) {
-//     // move left (subtract 10 from x-axis)
-//     if (direction === 37) {
-//         if (!willItCollide([squarePosition[0] - 10, squarePosition[1]], vf)) {
-//             eraseCanvas();
-//             ctx.beginPath();
-//             squarePosition[0] = squarePosition[0] - 10;
-//             ctx.fillStyle = 'green';
-//             ctx.rect(squarePosition[0], squarePosition[1], squareSide, squareSide);
-//             ctx.fill();
-//         }
+function move(direction) {
+    // move left (subtract 10 from x-axis)
+    if (direction === 37) {
+        if (!willItCollide([squarePosition[0] - 10, squarePosition[1]], vf)) {
+            eraseCanvas();
+            ctx.beginPath();
+            squarePosition[0] = squarePosition[0] - 10;
+            ctx.fillStyle = 'green';
+            ctx.rect(squarePosition[0], squarePosition[1], squareSide, squareSide);
+            ctx.fill();
+        }
         
-//     }
-//     // move up (subtract 10 from y-axis)
-//     if (direction === 38) {
-//         if (!willItCollide([squarePosition[0], squarePosition[1] - 10], vf)) {
-//             eraseCanvas();
-//             ctx.beginPath();
-//             squarePosition[1] = squarePosition[1] - 10;
-//             ctx.fillStyle = 'green';
-//             ctx.rect(squarePosition[0], squarePosition[1], squareSide, squareSide);
-//             ctx.fill();
-//         }
+    }
+    // move up (subtract 10 from y-axis)
+    if (direction === 38) {
+        if (!willItCollide([squarePosition[0], squarePosition[1] - 10], vf)) {
+            eraseCanvas();
+            ctx.beginPath();
+            squarePosition[1] = squarePosition[1] - 10;
+            ctx.fillStyle = 'green';
+            ctx.rect(squarePosition[0], squarePosition[1], squareSide, squareSide);
+            ctx.fill();
+        }
         
-//     }
-//     // move right (add 10 to x-axis)
-//     if (direction === 39) {
-//         if (!willItCollide([squarePosition[0] + 10, squarePosition[1]], vf)) {
-//             eraseCanvas();
-//             ctx.beginPath();
-//             squarePosition[0] = squarePosition[0] + 10;
-//             ctx.fillStyle = 'green';
-//             ctx.rect(squarePosition[0], squarePosition[1], squareSide, squareSide);
-//             ctx.fill();
-//         }
-//     }
-//     // move down (add 10 to y-axis)
-//     if (direction === 40) {
-//         if (!willItCollide([squarePosition[0], squarePosition[1] + 10], vf)) {
-//             eraseCanvas();
-//             ctx.beginPath();
-//             squarePosition[1] = squarePosition[1] + 10;
-//             ctx.fillStyle = 'green';
-//             ctx.rect(squarePosition[0], squarePosition[1], squareSide, squareSide);
-//             ctx.fill();
+    }
+    // move right (add 10 to x-axis)
+    if (direction === 39) {
+        if (!willItCollide([squarePosition[0] + 10, squarePosition[1]], vf)) {
+            eraseCanvas();
+            ctx.beginPath();
+            squarePosition[0] = squarePosition[0] + 10;
+            ctx.fillStyle = 'green';
+            ctx.rect(squarePosition[0], squarePosition[1], squareSide, squareSide);
+            ctx.fill();
+        }
+    }
+    // move down (add 10 to y-axis)
+    if (direction === 40) {
+        if (!willItCollide([squarePosition[0], squarePosition[1] + 10], vf)) {
+            eraseCanvas();
+            ctx.beginPath();
+            squarePosition[1] = squarePosition[1] + 10;
+            ctx.fillStyle = 'green';
+            ctx.rect(squarePosition[0], squarePosition[1], squareSide, squareSide);
+            ctx.fill();
             
-//         }
-//     }
-// };
+        }
+    }
+};
 
 function createSnake(x, y) {
     return new Array([x ,y]);
@@ -168,6 +168,6 @@ function move(snake, vector) {
     return newSnake;
 }
 
-// let snk = [[120, 100], [110,100], [100,100]];
-// let vect = [10,0];
-// let result = move(snk, vect);
+let snk = [[120, 100], [110,100], [100,100]];
+let vect = [10,0];
+let result = move(snk, vect);
